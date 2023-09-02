@@ -22,27 +22,27 @@ public class UserController implements UserApi {
         this.userService = userService;
     }
 
-//    @Override
-//    public Mono<ResponseEntity<Flux<UserDTO>>> userSearchGet(String firstName, String lastName, ServerWebExchange exchange) {
-//
-//        Flux<UserDTO> all = userService.findUserByName(firstName, lastName);
-//
-//        return Mono.just(ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(all));
-//    }
-
-
     @Override
     public Mono<ResponseEntity<UserDTO>> userGetIdGet(String id, ServerWebExchange exchange) {
+        //           @ApiResponse(responseCode = "200", description = "Успешное получение анкеты пользователя", content = {
+        //                @Content(mediaType = "application/json", schema = @Schema(implementation = UserDTO.class))
+        //            }),
+        //            @ApiResponse(responseCode = "400", description = "Невалидные данные"),
+        //            @ApiResponse(responseCode = "404", description = "Анкета не найдена"),
+        //            @ApiResponse(responseCode = "500", description = "Ошибка сервера", content = {
+        //                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginPost500ResponseDTO.class))
+        //            }),
+        //            @ApiResponse(responseCode = "503", description = "Ошибка сервера", content = {
+        //                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginPost500ResponseDTO.class))
+        //            })
 
         return userService.getUserById(id)
                 .map(ResponseEntity::ok)
-                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()))
-                .onErrorResume(e -> e.getClass() == java.lang.IllegalArgumentException.class,error -> {
-                    log.error("ошибка запроса", error);
-                    return Mono.just(ResponseEntity.badRequest().build());
-                });
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+//                .onErrorResume(e -> e.getClass() == java.lang.IllegalArgumentException.class,error -> {
+//                    log.error("ошибка запроса", error);
+//                    return Mono.just(ResponseEntity.badRequest().build());
+//                });
     }
 
     @Override
