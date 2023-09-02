@@ -20,10 +20,9 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("_post_create_post_request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class PostCreatePostRequestDTO {
 
-  @JsonProperty("text")
   private String text;
 
   public PostCreatePostRequestDTO text(String text) {
@@ -37,6 +36,7 @@ public class PostCreatePostRequestDTO {
   */
   @NotNull 
   @Schema(name = "text", example = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa.", description = "Текст поста", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("text")
   public String getText() {
     return text;
   }

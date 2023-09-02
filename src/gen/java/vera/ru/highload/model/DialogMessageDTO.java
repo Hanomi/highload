@@ -20,16 +20,13 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("DialogMessage")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class DialogMessageDTO {
 
-  @JsonProperty("from")
   private String from;
 
-  @JsonProperty("to")
   private String to;
 
-  @JsonProperty("text")
   private String text;
 
   public DialogMessageDTO from(String from) {
@@ -43,6 +40,7 @@ public class DialogMessageDTO {
   */
   @NotNull 
   @Schema(name = "from", description = "Идентификатор пользователя", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("from")
   public String getFrom() {
     return from;
   }
@@ -62,6 +60,7 @@ public class DialogMessageDTO {
   */
   @NotNull 
   @Schema(name = "to", description = "Идентификатор пользователя", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("to")
   public String getTo() {
     return to;
   }
@@ -81,6 +80,7 @@ public class DialogMessageDTO {
   */
   @NotNull 
   @Schema(name = "text", example = "Привет, как дела?", description = "Текст сообщения", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("text")
   public String getText() {
     return text;
   }

@@ -22,29 +22,22 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("_user_register_post_request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class UserRegisterPostRequestDTO {
 
-  @JsonProperty("first_name")
   private String firstName;
 
-  @JsonProperty("second_name")
   private String secondName;
 
-  @JsonProperty("age")
   private Integer age;
 
-  @JsonProperty("birthdate")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate birthdate;
 
-  @JsonProperty("biography")
   private String biography;
 
-  @JsonProperty("city")
   private String city;
 
-  @JsonProperty("password")
   private String password;
 
   public UserRegisterPostRequestDTO firstName(String firstName) {
@@ -58,6 +51,7 @@ public class UserRegisterPostRequestDTO {
   */
   
   @Schema(name = "first_name", example = "Имя", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("first_name")
   public String getFirstName() {
     return firstName;
   }
@@ -77,6 +71,7 @@ public class UserRegisterPostRequestDTO {
   */
   
   @Schema(name = "second_name", example = "Фамилия", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("second_name")
   public String getSecondName() {
     return secondName;
   }
@@ -96,6 +91,7 @@ public class UserRegisterPostRequestDTO {
   */
   
   @Schema(name = "age", example = "18", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("age")
   public Integer getAge() {
     return age;
   }
@@ -115,6 +111,7 @@ public class UserRegisterPostRequestDTO {
   */
   @Valid 
   @Schema(name = "birthdate", example = "Wed Feb 01 03:00:00 MSK 2017", description = "Дата рождения", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("birthdate")
   public LocalDate getBirthdate() {
     return birthdate;
   }
@@ -134,6 +131,7 @@ public class UserRegisterPostRequestDTO {
   */
   
   @Schema(name = "biography", example = "Хобби, интересы и т.п.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("biography")
   public String getBiography() {
     return biography;
   }
@@ -153,6 +151,7 @@ public class UserRegisterPostRequestDTO {
   */
   
   @Schema(name = "city", example = "Москва", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("city")
   public String getCity() {
     return city;
   }
@@ -172,6 +171,7 @@ public class UserRegisterPostRequestDTO {
   */
   
   @Schema(name = "password", example = "Секретная строка", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("password")
   public String getPassword() {
     return password;
   }

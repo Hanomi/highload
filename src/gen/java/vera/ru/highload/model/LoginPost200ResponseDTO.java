@@ -20,10 +20,9 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("_login_post_200_response")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class LoginPost200ResponseDTO {
 
-  @JsonProperty("token")
   private String token;
 
   public LoginPost200ResponseDTO token(String token) {
@@ -37,6 +36,7 @@ public class LoginPost200ResponseDTO {
   */
   
   @Schema(name = "token", example = "e4d2e6b0-cde2-42c5-aac3-0b8316f21e58", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("token")
   public String getToken() {
     return token;
   }

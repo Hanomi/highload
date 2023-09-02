@@ -20,16 +20,13 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("_login_post_500_response")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class LoginPost500ResponseDTO {
 
-  @JsonProperty("message")
   private String message;
 
-  @JsonProperty("request_id")
   private String requestId;
 
-  @JsonProperty("code")
   private Integer code;
 
   public LoginPost500ResponseDTO message(String message) {
@@ -43,6 +40,7 @@ public class LoginPost500ResponseDTO {
   */
   @NotNull 
   @Schema(name = "message", description = "Описание ошибки", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("message")
   public String getMessage() {
     return message;
   }
@@ -62,6 +60,7 @@ public class LoginPost500ResponseDTO {
   */
   
   @Schema(name = "request_id", description = "Идентификатор запроса. Предназначен для более быстрого поиска проблем.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("request_id")
   public String getRequestId() {
     return requestId;
   }
@@ -81,6 +80,7 @@ public class LoginPost500ResponseDTO {
   */
   
   @Schema(name = "code", description = "Код ошибки. Предназначен для классификации проблем и более быстрого решения проблем.", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("code")
   public Integer getCode() {
     return code;
   }

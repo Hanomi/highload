@@ -20,13 +20,11 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("_post_update_put_request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class PostUpdatePutRequestDTO {
 
-  @JsonProperty("id")
   private String id;
 
-  @JsonProperty("text")
   private String text;
 
   public PostUpdatePutRequestDTO id(String id) {
@@ -40,6 +38,7 @@ public class PostUpdatePutRequestDTO {
   */
   @NotNull 
   @Schema(name = "id", example = "1d535fd6-7521-4cb1-aa6d-031be7123c4d", description = "Идентификатор поста", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("id")
   public String getId() {
     return id;
   }
@@ -59,6 +58,7 @@ public class PostUpdatePutRequestDTO {
   */
   @NotNull 
   @Schema(name = "text", example = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa.", description = "Текст поста", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("text")
   public String getText() {
     return text;
   }

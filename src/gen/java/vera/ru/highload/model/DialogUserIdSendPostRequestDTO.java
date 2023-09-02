@@ -20,10 +20,9 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("_dialog__user_id__send_post_request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class DialogUserIdSendPostRequestDTO {
 
-  @JsonProperty("text")
   private String text;
 
   public DialogUserIdSendPostRequestDTO text(String text) {
@@ -37,6 +36,7 @@ public class DialogUserIdSendPostRequestDTO {
   */
   @NotNull 
   @Schema(name = "text", example = "Привет, как дела?", description = "Текст сообщения", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("text")
   public String getText() {
     return text;
   }

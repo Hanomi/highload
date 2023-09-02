@@ -22,29 +22,22 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("User")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class UserDTO {
 
-  @JsonProperty("id")
   private String id;
 
-  @JsonProperty("first_name")
   private String firstName;
 
-  @JsonProperty("second_name")
   private String secondName;
 
-  @JsonProperty("age")
   private Integer age;
 
-  @JsonProperty("birthdate")
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate birthdate;
 
-  @JsonProperty("biography")
   private String biography;
 
-  @JsonProperty("city")
   private String city;
 
   public UserDTO id(String id) {
@@ -58,6 +51,7 @@ public class UserDTO {
   */
   
   @Schema(name = "id", description = "Идентификатор пользователя", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("id")
   public String getId() {
     return id;
   }
@@ -77,6 +71,7 @@ public class UserDTO {
   */
   
   @Schema(name = "first_name", example = "Имя", description = "Имя", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("first_name")
   public String getFirstName() {
     return firstName;
   }
@@ -96,6 +91,7 @@ public class UserDTO {
   */
   
   @Schema(name = "second_name", example = "Фамилия", description = "Фамилия", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("second_name")
   public String getSecondName() {
     return secondName;
   }
@@ -115,6 +111,7 @@ public class UserDTO {
   */
   
   @Schema(name = "age", example = "18", description = "Возраст", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("age")
   public Integer getAge() {
     return age;
   }
@@ -134,6 +131,7 @@ public class UserDTO {
   */
   @Valid 
   @Schema(name = "birthdate", example = "Wed Feb 01 03:00:00 MSK 2017", description = "Дата рождения", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("birthdate")
   public LocalDate getBirthdate() {
     return birthdate;
   }
@@ -153,6 +151,7 @@ public class UserDTO {
   */
   
   @Schema(name = "biography", example = "Хобби, интересы и т.п.", description = "Интересы", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("biography")
   public String getBiography() {
     return biography;
   }
@@ -172,6 +171,7 @@ public class UserDTO {
   */
   
   @Schema(name = "city", example = "Москва", description = "Город", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("city")
   public String getCity() {
     return city;
   }

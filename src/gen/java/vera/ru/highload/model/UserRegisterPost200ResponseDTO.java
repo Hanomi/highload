@@ -20,10 +20,9 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("_user_register_post_200_response")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class UserRegisterPost200ResponseDTO {
 
-  @JsonProperty("user_id")
   private String userId;
 
   public UserRegisterPost200ResponseDTO userId(String userId) {
@@ -37,6 +36,7 @@ public class UserRegisterPost200ResponseDTO {
   */
   
   @Schema(name = "user_id", example = "e4d2e6b0-cde2-42c5-aac3-0b8316f21e58", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("user_id")
   public String getUserId() {
     return userId;
   }

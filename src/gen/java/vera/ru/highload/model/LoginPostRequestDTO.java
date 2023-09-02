@@ -20,13 +20,11 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("_login_post_request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class LoginPostRequestDTO {
 
-  @JsonProperty("id")
   private String id;
 
-  @JsonProperty("password")
   private String password;
 
   public LoginPostRequestDTO id(String id) {
@@ -40,6 +38,7 @@ public class LoginPostRequestDTO {
   */
   
   @Schema(name = "id", description = "Идентификатор пользователя", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("id")
   public String getId() {
     return id;
   }
@@ -59,6 +58,7 @@ public class LoginPostRequestDTO {
   */
   
   @Schema(name = "password", example = "Секретная строка", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("password")
   public String getPassword() {
     return password;
   }

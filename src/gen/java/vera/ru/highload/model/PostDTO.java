@@ -21,16 +21,13 @@ import jakarta.annotation.Generated;
 
 @Schema(name = "Post", description = "Пост пользователя")
 @JsonTypeName("Post")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T12:49:18.455165800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T14:32:27.265904500+03:00[Europe/Moscow]")
 public class PostDTO {
 
-  @JsonProperty("id")
   private String id;
 
-  @JsonProperty("text")
   private String text;
 
-  @JsonProperty("author_user_id")
   private String authorUserId;
 
   public PostDTO id(String id) {
@@ -44,6 +41,7 @@ public class PostDTO {
   */
   
   @Schema(name = "id", example = "1d535fd6-7521-4cb1-aa6d-031be7123c4d", description = "Идентификатор поста", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("id")
   public String getId() {
     return id;
   }
@@ -63,6 +61,7 @@ public class PostDTO {
   */
   
   @Schema(name = "text", example = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa.", description = "Текст поста", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("text")
   public String getText() {
     return text;
   }
@@ -82,6 +81,7 @@ public class PostDTO {
   */
   
   @Schema(name = "author_user_id", description = "Идентификатор пользователя", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("author_user_id")
   public String getAuthorUserId() {
     return authorUserId;
   }
