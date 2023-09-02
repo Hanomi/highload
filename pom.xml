@@ -190,6 +190,7 @@
 								<interfaceOnly>true</interfaceOnly>
 								<dateLibrary>java8</dateLibrary>
 								<generatedConstructorWithRequiredArgs>false</generatedConstructorWithRequiredArgs>
+								<!--suppress UnresolvedMavenProperty -->
 								<additionalModelTypeAnnotations>@lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
 							</configOptions>
 						</configuration>

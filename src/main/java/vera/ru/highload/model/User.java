@@ -9,6 +9,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * UserDTO
@@ -21,7 +22,7 @@ import java.time.LocalDate;
 public class User {
 
     @Id
-    private String id;
+    private UUID id;
     @Column("FIRSTNAME")
     private String firstName;
     @Column("SECONDNAME")
