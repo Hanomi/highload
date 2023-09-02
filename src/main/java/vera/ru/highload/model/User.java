@@ -29,7 +29,6 @@ public class User {
     private LocalDate birthdate;
     private String biography;
     private String city;
-    //todo protect me :D
     private String password;
 
 }

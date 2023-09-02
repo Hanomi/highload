@@ -10,9 +10,6 @@ import vera.ru.highload.model.User;
 @Mapper(componentModel = "Spring")
 public interface LoginMapper {
 
-
-    User toUser(LoginPostRequestDTO loginPostRequestDTO);
-
     default Login userToLogin(User user) {
         return Login.builder().userId(user.getId()).build();
     }

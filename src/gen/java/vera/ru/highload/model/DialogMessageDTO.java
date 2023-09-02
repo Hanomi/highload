@@ -20,7 +20,7 @@ import jakarta.annotation.Generated;
 @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor
 
 @JsonTypeName("DialogMessage")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T15:14:17.871550300+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T18:22:37.778719600+03:00[Europe/Moscow]")
 public class DialogMessageDTO {
 
   private String from;

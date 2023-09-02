@@ -1,12 +1,10 @@
 package vera.ru.highload.service;
 
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import vera.ru.highload.mapper.UserMapper;
-import vera.ru.highload.model.User;
-import vera.ru.highload.model.UserDTO;
-import vera.ru.highload.model.UserRegisterPost200ResponseDTO;
-import vera.ru.highload.model.UserRegisterPostRequestDTO;
+import vera.ru.highload.model.*;
 import vera.ru.highload.repository.UserRepository;
 
 import java.util.UUID;
@@ -14,6 +12,7 @@ import java.util.UUID;
 @Component
 public class UserServiceImpl implements UserService {
 
+    private final Argon2PasswordEncoder encoder = new Argon2PasswordEncoder(32,64,1,15*1024,2);
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -43,7 +42,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Mono<User> findByIdAndPassword(User r) {
-        return userRepository.findUserByIdAndPassword(r.getId(), r.getPassword());
+    public Mono<User> findByIdAndPassword(Mono<LoginPostRequestDTO> r) {
+        return r.map(userMapper::loginRequestToUser)
+                .flatMap(u -> userRepository
+                        .findById(u.getId())
+                        .filter(i -> encoder.matches(u.getPassword(), i.getPassword())));
     }
 }
