@@ -11,26 +11,18 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.time.LocalDate;
 import java.util.UUID;
 
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(schema = "mydbschema", name = "users")
-public class User {
+@Table(schema = "mydbschema", name = "logins")
+public class Login {
 
     @Id
+    @Column("ID")
     private UUID id;
-    @Column("FIRST_NAME")
-    private String firstName;
-    @Column("SECOND_NAME")
-    private String secondName;
-    private Integer age;
-    private LocalDate birthdate;
-    private String biography;
-    private String city;
-    //todo protect me :D
-    private String password;
+    @Column("USER_ID")
+    private UUID userId;
 
 }
 

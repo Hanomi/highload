@@ -3,6 +3,7 @@ package vera.ru.highload.service;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import vera.ru.highload.mapper.UserMapper;
+import vera.ru.highload.model.User;
 import vera.ru.highload.model.UserDTO;
 import vera.ru.highload.model.UserRegisterPost200ResponseDTO;
 import vera.ru.highload.model.UserRegisterPostRequestDTO;
@@ -37,18 +38,12 @@ public class UserServiceImpl implements UserService {
         return userRegisterPostRequestDTO
                 .map(userMapper::userRequestToUser)
                 .flatMap(userRepository::save)
-                .doOnNext(i -> System.out.println(i))
                 .map(userMapper::toUserRegResponse);
 
     }
 
-//    @Override
-//    public Flux<UserDTO> findUserByName(String firstName, String lastName) {
-//
-//        return userRepository
-//                .findAll()
-//                .map(userMapper::userToDto);
-//    }
-
-
+    @Override
+    public Mono<User> findByIdAndPassword(User r) {
+        return userRepository.findUserByIdAndPassword(r.getId(), r.getPassword());
+    }
 }
