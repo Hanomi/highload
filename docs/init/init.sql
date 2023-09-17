@@ -1,5 +1,4 @@
 CREATE SCHEMA mydbschema;
-GRANT USAGE ON SCHEMA mydbschema TO mydbuser;
 
 CREATE TABLE IF NOT EXISTS mydbschema.users
 (
@@ -19,5 +18,4 @@ CREATE TABLE IF NOT EXISTS mydbschema.logins
     user_id uuid NOT NULL UNIQUE
 );
 
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mydbschema TO mydbuser;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA mydbschema TO postgres;

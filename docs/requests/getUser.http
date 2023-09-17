@@ -1,5 +1,5 @@
 < {%
-    request.variables.set("id", "b14603b4-6683-43b1-baa6-9319da6b2282")
+    request.variables.set("id", "5f64a93a-ccff-459d-a2e5-fecd60474e1d")
 %}
 
 GET http://localhost:8080/user/get/{{id}}

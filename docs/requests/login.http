@@ -2,11 +2,9 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "id" : "b14603b4-6683-43b1-baa6-9319da6b2282",
+  "id" : "5f64a93a-ccff-459d-a2e5-fecd60474e1d",
   "password": "emptypassword123"
 }
-
-
 
 <> 2023-09-17T175210.200.json
 <> 2023-09-17T175125-1.200.json
