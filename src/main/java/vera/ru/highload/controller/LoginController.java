@@ -2,8 +2,6 @@ package vera.ru.highload.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Mono;
 import vera.ru.highload.model.LoginPost200ResponseDTO;
 import vera.ru.highload.model.LoginPostRequestDTO;
 import vera.ru.highload.service.LoginService;
@@ -18,20 +16,10 @@ public class LoginController implements LoginApi {
     }
 
     @Override
-    public Mono<ResponseEntity<LoginPost200ResponseDTO>> loginPost(Mono<LoginPostRequestDTO> loginPostRequestDTO, ServerWebExchange exchange) {
-        //           @ApiResponse(responseCode = "200", description = "Успешная аутентификация", content = {
-        //                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginPost200ResponseDTO.class))
-        //            }),
-        //            @ApiResponse(responseCode = "400", description = "Невалидные данные"),
-        //            @ApiResponse(responseCode = "404", description = "Пользователь не найден"),
-        //            @ApiResponse(responseCode = "500", description = "Ошибка сервера", content = {
-        //                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginPost500ResponseDTO.class))
-        //            }),
-        //            @ApiResponse(responseCode = "503", description = "Ошибка сервера", content = {
-        //                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginPost500ResponseDTO.class))
-        //            })
+    public ResponseEntity<LoginPost200ResponseDTO> loginPost(LoginPostRequestDTO request) {
 
-        return loginService.login(loginPostRequestDTO)
-                .map(ResponseEntity::ok);
+        var login = loginService.login(request);
+
+        return ResponseEntity.ok(login);
     }
 }

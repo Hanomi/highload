@@ -1,12 +1,15 @@
 package vera.ru.highload.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
+
+import org.springframework.web.server.ResponseStatusException;
 import vera.ru.highload.mapper.UserMapper;
 import vera.ru.highload.model.*;
 import vera.ru.highload.repository.UserRepository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -24,28 +27,41 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Mono<UserDTO> getUserById(String id) {
-        return Mono.just(id)
-                .map(UUID::fromString)
-                .flatMap(userRepository::findById)
-                .map(userMapper::userToDto);
+    public Optional<UserDTO> getUserById(String id) {
+
+        UUID uuid;
+        try {
+            uuid = UUID.fromString(id);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Невалидные данные");
+        }
+        var user = userRepository.findById(uuid);
+
+        return user.map(userMapper::userToDto);
     }
 
     @Override
-    public Mono<UserRegisterPost200ResponseDTO> registryUser(Mono<UserRegisterPostRequestDTO> userRegisterPostRequestDTO) {
+    public UserRegisterPost200ResponseDTO registryUser(UserRegisterPostRequestDTO userRegisterPostRequestDTO) {
 
-        return userRegisterPostRequestDTO
-                .map(userMapper::userRequestToUser)
-                .flatMap(userRepository::save)
-                .map(userMapper::toUserRegResponse);
+        var user = userMapper.userRequestToUser(userRegisterPostRequestDTO);
+        user.setPassword(encoder.encode(user.getPassword()));
+        var savedUser = userRepository.save(user);
 
+        return userMapper.toUserRegResponse(savedUser);
     }
 
     @Override
-    public Mono<User> findByIdAndPassword(Mono<LoginPostRequestDTO> r) {
-        return r.map(userMapper::loginRequestToUser)
-                .flatMap(u -> userRepository
-                        .findById(u.getId())
-                        .filter(i -> encoder.matches(u.getPassword(), i.getPassword())));
+    public Optional<User> findByIdAndPassword(LoginPostRequestDTO r) {
+
+        User user;
+
+        try {
+            user = userMapper.loginRequestToUser(r);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Невалидные данные");
+        }
+
+        return userRepository.grepIdAndPasswordById(user.getId())
+                .filter(i -> encoder.matches(r.getPassword(), i.getPassword()));
     }
 }

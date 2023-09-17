@@ -26,11 +26,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import org.springframework.http.codec.multipart.Part;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -39,10 +36,14 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T18:22:37.778719600+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-17T16:50:31.741335400+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "post", description = "the post API")
 public interface PostApi {
+
+    default Optional<NativeWebRequest> getRequest() {
+        return Optional.empty();
+    }
 
     /**
      * POST /post/create
@@ -79,20 +80,19 @@ public interface PostApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default Mono<ResponseEntity<String>> postCreatePost(
-        @Parameter(name = "PostCreatePostRequestDTO", description = "") @Valid @RequestBody(required = false) Mono<PostCreatePostRequestDTO> postCreatePostRequestDTO,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<String> postCreatePost(
+        @Parameter(name = "PostCreatePostRequestDTO", description = "") @Valid @RequestBody(required = false) PostCreatePostRequestDTO postCreatePostRequestDTO
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        for (MediaType mediaType : exchange.getRequest().getHeaders().getAccept()) {
-            if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                String exampleString = "\"1d535fd6-7521-4cb1-aa6d-031be7123c4d\"";
-                result = ApiUtil.getExampleResponse(exchange, mediaType, exampleString);
-                break;
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "\"1d535fd6-7521-4cb1-aa6d-031be7123c4d\"";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
             }
-        }
-        return result.then(postCreatePostRequestDTO).then(Mono.empty());
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
@@ -129,13 +129,10 @@ public interface PostApi {
         value = "/post/delete/{id}",
         produces = { "application/json" }
     )
-    default Mono<ResponseEntity<Void>> postDeleteIdPut(
-        @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<Void> postDeleteIdPut(
+        @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        return result.then(Mono.empty());
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
@@ -175,21 +172,20 @@ public interface PostApi {
         value = "/post/feed",
         produces = { "application/json" }
     )
-    default Mono<ResponseEntity<Flux<PostDTO>>> postFeedGet(
+    default ResponseEntity<List<PostDTO>> postFeedGet(
         @DecimalMin("0") @Parameter(name = "offset", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "offset", required = false, defaultValue = "0") BigDecimal offset,
-        @DecimalMin("1") @Parameter(name = "limit", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "limit", required = false, defaultValue = "10") BigDecimal limit,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+        @DecimalMin("1") @Parameter(name = "limit", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "limit", required = false, defaultValue = "10") BigDecimal limit
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        for (MediaType mediaType : exchange.getRequest().getHeaders().getAccept()) {
-            if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                String exampleString = "[ { \"author_user_id\" : \"author_user_id\", \"id\" : \"1d535fd6-7521-4cb1-aa6d-031be7123c4d\", \"text\" : \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa.\" }, { \"author_user_id\" : \"author_user_id\", \"id\" : \"1d535fd6-7521-4cb1-aa6d-031be7123c4d\", \"text\" : \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa.\" } ]";
-                result = ApiUtil.getExampleResponse(exchange, mediaType, exampleString);
-                break;
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "[ { \"author_user_id\" : \"author_user_id\", \"id\" : \"1d535fd6-7521-4cb1-aa6d-031be7123c4d\", \"text\" : \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa.\" }, { \"author_user_id\" : \"author_user_id\", \"id\" : \"1d535fd6-7521-4cb1-aa6d-031be7123c4d\", \"text\" : \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa.\" } ]";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
             }
-        }
-        return result.then(Mono.empty());
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
@@ -225,20 +221,19 @@ public interface PostApi {
         value = "/post/get/{id}",
         produces = { "application/json" }
     )
-    default Mono<ResponseEntity<PostDTO>> postGetIdGet(
-        @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<PostDTO> postGetIdGet(
+        @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        for (MediaType mediaType : exchange.getRequest().getHeaders().getAccept()) {
-            if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                String exampleString = "{ \"author_user_id\" : \"author_user_id\", \"id\" : \"1d535fd6-7521-4cb1-aa6d-031be7123c4d\", \"text\" : \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa.\" }";
-                result = ApiUtil.getExampleResponse(exchange, mediaType, exampleString);
-                break;
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"author_user_id\" : \"author_user_id\", \"id\" : \"1d535fd6-7521-4cb1-aa6d-031be7123c4d\", \"text\" : \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus mauris ultrices eros in cursus turpis massa.\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
             }
-        }
-        return result.then(Mono.empty());
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
@@ -276,13 +271,10 @@ public interface PostApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default Mono<ResponseEntity<Void>> postUpdatePut(
-        @Parameter(name = "PostUpdatePutRequestDTO", description = "") @Valid @RequestBody(required = false) Mono<PostUpdatePutRequestDTO> postUpdatePutRequestDTO,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<Void> postUpdatePut(
+        @Parameter(name = "PostUpdatePutRequestDTO", description = "") @Valid @RequestBody(required = false) PostUpdatePutRequestDTO postUpdatePutRequestDTO
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        return result.then(postUpdatePutRequestDTO).then(Mono.empty());
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 

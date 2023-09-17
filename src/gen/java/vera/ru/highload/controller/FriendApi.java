@@ -22,11 +22,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import org.springframework.http.codec.multipart.Part;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -35,10 +32,14 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T18:22:37.778719600+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-17T16:50:31.741335400+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "friend", description = "the friend API")
 public interface FriendApi {
+
+    default Optional<NativeWebRequest> getRequest() {
+        return Optional.empty();
+    }
 
     /**
      * PUT /friend/delete/{user_id}
@@ -72,13 +73,10 @@ public interface FriendApi {
         value = "/friend/delete/{user_id}",
         produces = { "application/json" }
     )
-    default Mono<ResponseEntity<Void>> friendDeleteUserIdPut(
-        @Parameter(name = "user_id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("user_id") String userId,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<Void> friendDeleteUserIdPut(
+        @Parameter(name = "user_id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("user_id") String userId
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        return result.then(Mono.empty());
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
@@ -115,13 +113,10 @@ public interface FriendApi {
         value = "/friend/set/{user_id}",
         produces = { "application/json" }
     )
-    default Mono<ResponseEntity<Void>> friendSetUserIdPut(
-        @Parameter(name = "user_id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("user_id") String userId,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<Void> friendSetUserIdPut(
+        @Parameter(name = "user_id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("user_id") String userId
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        return result.then(Mono.empty());
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 

@@ -1,0 +1,12 @@
+POST http://localhost:8080/user/register
+Content-Type: application/json
+
+{
+  "first_name": "Hanomi",
+  "second_name": "Desu",
+  "age": 19,
+  "biography": "desu coder",
+  "city": "Osaka",
+  "birthdate": "2004-12-31",
+  "password": "emptypassword123"
+}

@@ -24,11 +24,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import org.springframework.http.codec.multipart.Part;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -37,10 +34,14 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T18:22:37.778719600+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-17T16:50:31.741335400+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "login", description = "the login API")
 public interface LoginApi {
+
+    default Optional<NativeWebRequest> getRequest() {
+        return Optional.empty();
+    }
 
     /**
      * POST /login
@@ -76,20 +77,19 @@ public interface LoginApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default Mono<ResponseEntity<LoginPost200ResponseDTO>> loginPost(
-        @Parameter(name = "LoginPostRequestDTO", description = "") @Valid @RequestBody(required = false) Mono<LoginPostRequestDTO> loginPostRequestDTO,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<LoginPost200ResponseDTO> loginPost(
+        @Parameter(name = "LoginPostRequestDTO", description = "") @Valid @RequestBody(required = false) LoginPostRequestDTO loginPostRequestDTO
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        for (MediaType mediaType : exchange.getRequest().getHeaders().getAccept()) {
-            if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                String exampleString = "{ \"token\" : \"e4d2e6b0-cde2-42c5-aac3-0b8316f21e58\" }";
-                result = ApiUtil.getExampleResponse(exchange, mediaType, exampleString);
-                break;
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"token\" : \"e4d2e6b0-cde2-42c5-aac3-0b8316f21e58\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
             }
-        }
-        return result.then(loginPostRequestDTO).then(Mono.empty());
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 

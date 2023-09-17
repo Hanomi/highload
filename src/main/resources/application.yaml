@@ -1,9 +1,8 @@
 spring:
-  r2dbc:
-    url: "r2dbc:postgresql://localhost:5432/postgres"
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/postgres"
     username: "mydbuser"
     password: "hello22"
-
 
 springdoc:
   swagger-ui:

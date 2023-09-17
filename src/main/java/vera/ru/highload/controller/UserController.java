@@ -1,12 +1,9 @@
 package vera.ru.highload.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
 import vera.ru.highload.model.UserDTO;
 import vera.ru.highload.model.UserRegisterPost200ResponseDTO;
 import vera.ru.highload.model.UserRegisterPostRequestDTO;
@@ -23,42 +20,18 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public Mono<ResponseEntity<UserDTO>> userGetIdGet(String id, ServerWebExchange exchange) {
-        //           @ApiResponse(responseCode = "200", description = "Успешное получение анкеты пользователя", content = {
-        //                @Content(mediaType = "application/json", schema = @Schema(implementation = UserDTO.class))
-        //            }),
-        //            @ApiResponse(responseCode = "400", description = "Невалидные данные"),
-        //            @ApiResponse(responseCode = "404", description = "Анкета не найдена"),
-        //            @ApiResponse(responseCode = "500", description = "Ошибка сервера", content = {
-        //                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginPost500ResponseDTO.class))
-        //            }),
-        //            @ApiResponse(responseCode = "503", description = "Ошибка сервера", content = {
-        //                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginPost500ResponseDTO.class))
-        //            })
+    public ResponseEntity<UserDTO> userGetIdGet(String id) {
+        var user = userService.getUserById(id);
 
-        return userService.getUserById(id)
-                .map(ResponseEntity::ok)
-                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
-//                .onErrorResume(e -> e.getClass() == java.lang.IllegalArgumentException.class,error -> {
-//                    log.error("ошибка запроса", error);
-//                    return Mono.just(ResponseEntity.badRequest().build());
-//                });
+        return user.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Override
-    public Mono<ResponseEntity<UserRegisterPost200ResponseDTO>> userRegisterPost(Mono<UserRegisterPostRequestDTO> userRegisterPostRequestDTO, ServerWebExchange exchange) {
-        //          @ApiResponse(responseCode = "200", description = "Успешная регистрация", content = {
-        //                @Content(mediaType = "application/json", schema = @Schema(implementation = UserRegisterPost200ResponseDTO.class))
-        //            }),
-        //            @ApiResponse(responseCode = "400", description = "Невалидные данные"),
-        //            @ApiResponse(responseCode = "500", description = "Ошибка сервера", content = {
-        //                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginPost500ResponseDTO.class))
-        //            }),
-        //            @ApiResponse(responseCode = "503", description = "Ошибка сервера", content = {
-        //                @Content(mediaType = "application/json", schema = @Schema(implementation = LoginPost500ResponseDTO.class))
-        //            })
+    public ResponseEntity<UserRegisterPost200ResponseDTO> userRegisterPost(UserRegisterPostRequestDTO userRegisterPostRequestDTO) {
 
-        return userService.registryUser(userRegisterPostRequestDTO)
-                .map(ResponseEntity::ok);
+        var registeredUser = userService.registryUser(userRegisterPostRequestDTO);
+
+        return ResponseEntity.ok(registeredUser);
     }
 }

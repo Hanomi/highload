@@ -24,11 +24,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import org.springframework.http.codec.multipart.Part;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -37,10 +34,14 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T18:22:37.778719600+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-17T16:50:31.741335400+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "dialog", description = "the dialog API")
 public interface DialogApi {
+
+    default Optional<NativeWebRequest> getRequest() {
+        return Optional.empty();
+    }
 
     /**
      * GET /dialog/{user_id}/list
@@ -76,20 +77,19 @@ public interface DialogApi {
         value = "/dialog/{user_id}/list",
         produces = { "application/json" }
     )
-    default Mono<ResponseEntity<Flux<DialogMessageDTO>>> dialogUserIdListGet(
-        @Parameter(name = "user_id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("user_id") String userId,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<List<DialogMessageDTO>> dialogUserIdListGet(
+        @Parameter(name = "user_id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("user_id") String userId
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        for (MediaType mediaType : exchange.getRequest().getHeaders().getAccept()) {
-            if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                String exampleString = "[ { \"from\" : \"from\", \"to\" : \"to\", \"text\" : \"Привет, как дела?\" }, { \"from\" : \"from\", \"to\" : \"to\", \"text\" : \"Привет, как дела?\" } ]";
-                result = ApiUtil.getExampleResponse(exchange, mediaType, exampleString);
-                break;
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "[ { \"from\" : \"from\", \"to\" : \"to\", \"text\" : \"Привет, как дела?\" }, { \"from\" : \"from\", \"to\" : \"to\", \"text\" : \"Привет, как дела?\" } ]";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
             }
-        }
-        return result.then(Mono.empty());
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
@@ -128,14 +128,11 @@ public interface DialogApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default Mono<ResponseEntity<Void>> dialogUserIdSendPost(
+    default ResponseEntity<Void> dialogUserIdSendPost(
         @Parameter(name = "user_id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("user_id") String userId,
-        @Parameter(name = "DialogUserIdSendPostRequestDTO", description = "") @Valid @RequestBody(required = false) Mono<DialogUserIdSendPostRequestDTO> dialogUserIdSendPostRequestDTO,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+        @Parameter(name = "DialogUserIdSendPostRequestDTO", description = "") @Valid @RequestBody(required = false) DialogUserIdSendPostRequestDTO dialogUserIdSendPostRequestDTO
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        return result.then(dialogUserIdSendPostRequestDTO).then(Mono.empty());
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 

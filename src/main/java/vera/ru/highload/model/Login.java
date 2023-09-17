@@ -18,9 +18,9 @@ import java.util.UUID;
 public class Login {
 
     @Id
-    @Column("ID")
+    @Column("id")
     private UUID id;
-    @Column("USER_ID")
+    @Column("user_id")
     private UUID userId;
 
 }

@@ -1,40 +1,41 @@
 package vera.ru.highload.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
+import org.springframework.web.server.ResponseStatusException;
 import vera.ru.highload.mapper.LoginMapper;
-import vera.ru.highload.mapper.UserMapper;
 import vera.ru.highload.model.LoginPost200ResponseDTO;
 import vera.ru.highload.model.LoginPostRequestDTO;
 import vera.ru.highload.repository.LoginRepository;
 
-import java.util.UUID;
 
 @Component
 public class LoginServiceImpl implements LoginService {
 
     private final LoginRepository loginRepository;
     private final LoginMapper loginMapper;
-
     private final UserService userService;
 
     public LoginServiceImpl(
             LoginRepository loginRepository,
             LoginMapper loginMapper,
-            UserService userService,
-            UserMapper userMapper) {
+            UserService userService) {
         this.loginRepository = loginRepository;
         this.loginMapper = loginMapper;
         this.userService = userService;
     }
 
     @Override
-    public Mono<LoginPost200ResponseDTO> login(Mono<LoginPostRequestDTO> loginPostRequestDTO) {
+    public LoginPost200ResponseDTO login(LoginPostRequestDTO request) {
 
-       return userService.findByIdAndPassword(loginPostRequestDTO)
-                .map(loginMapper::userToLogin)
-                .flatMap(loginRepository::save)
-                .map(loginMapper::loginToResponse);
+        var user = userService.findByIdAndPassword(request)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь не найден"));
+
+        loginRepository.deleteLoginByUserId(user.getId());
+
+        var login = loginRepository.save(loginMapper.userToLogin(user));
+
+        return loginMapper.loginToResponse(login);
     }
 }
 

@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
 
 @Schema(name = "Post", description = "Пост пользователя")
 @JsonTypeName("Post")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T18:22:37.778719600+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-17T16:50:31.741335400+03:00[Europe/Moscow]")
 public class PostDTO {
 
   private String id;

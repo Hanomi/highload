@@ -25,11 +25,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import org.springframework.http.codec.multipart.Part;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -38,10 +35,14 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-02T18:22:37.778719600+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-17T16:50:31.741335400+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "user", description = "the user API")
 public interface UserApi {
+
+    default Optional<NativeWebRequest> getRequest() {
+        return Optional.empty();
+    }
 
     /**
      * GET /user/get/{id}
@@ -76,20 +77,19 @@ public interface UserApi {
         value = "/user/get/{id}",
         produces = { "application/json" }
     )
-    default Mono<ResponseEntity<UserDTO>> userGetIdGet(
-        @Parameter(name = "id", description = "Идентификатор пользователя", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<UserDTO> userGetIdGet(
+        @Parameter(name = "id", description = "Идентификатор пользователя", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        for (MediaType mediaType : exchange.getRequest().getHeaders().getAccept()) {
-            if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                String exampleString = "{ \"birthdate\" : \"2017-02-01T00:00:00.000+00:00\", \"city\" : \"Москва\", \"second_name\" : \"Фамилия\", \"id\" : \"id\", \"biography\" : \"Хобби, интересы и т.п.\", \"first_name\" : \"Имя\", \"age\" : 18 }";
-                result = ApiUtil.getExampleResponse(exchange, mediaType, exampleString);
-                break;
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"birthdate\" : \"2017-02-01T00:00:00.000+00:00\", \"city\" : \"Москва\", \"second_name\" : \"Фамилия\", \"id\" : \"id\", \"biography\" : \"Хобби, интересы и т.п.\", \"first_name\" : \"Имя\", \"age\" : 18 }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
             }
-        }
-        return result.then(Mono.empty());
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
@@ -126,20 +126,19 @@ public interface UserApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    default Mono<ResponseEntity<UserRegisterPost200ResponseDTO>> userRegisterPost(
-        @Parameter(name = "UserRegisterPostRequestDTO", description = "") @Valid @RequestBody(required = false) Mono<UserRegisterPostRequestDTO> userRegisterPostRequestDTO,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+    default ResponseEntity<UserRegisterPost200ResponseDTO> userRegisterPost(
+        @Parameter(name = "UserRegisterPostRequestDTO", description = "") @Valid @RequestBody(required = false) UserRegisterPostRequestDTO userRegisterPostRequestDTO
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        for (MediaType mediaType : exchange.getRequest().getHeaders().getAccept()) {
-            if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                String exampleString = "{ \"user_id\" : \"e4d2e6b0-cde2-42c5-aac3-0b8316f21e58\" }";
-                result = ApiUtil.getExampleResponse(exchange, mediaType, exampleString);
-                break;
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"user_id\" : \"e4d2e6b0-cde2-42c5-aac3-0b8316f21e58\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
             }
-        }
-        return result.then(userRegisterPostRequestDTO).then(Mono.empty());
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 
@@ -176,21 +175,20 @@ public interface UserApi {
         value = "/user/search",
         produces = { "application/json" }
     )
-    default Mono<ResponseEntity<Flux<UserDTO>>> userSearchGet(
+    default ResponseEntity<List<UserDTO>> userSearchGet(
         @NotNull @Parameter(name = "first_name", description = "Условие поиска по имени", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "first_name", required = true) String firstName,
-        @NotNull @Parameter(name = "last_name", description = "Условие поиска по фамилии", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "last_name", required = true) String lastName,
-        @Parameter(hidden = true) final ServerWebExchange exchange
+        @NotNull @Parameter(name = "last_name", description = "Условие поиска по фамилии", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "last_name", required = true) String lastName
     ) {
-        Mono<Void> result = Mono.empty();
-        exchange.getResponse().setStatusCode(HttpStatus.NOT_IMPLEMENTED);
-        for (MediaType mediaType : exchange.getRequest().getHeaders().getAccept()) {
-            if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                String exampleString = "[ { \"birthdate\" : \"2017-02-01T00:00:00.000+00:00\", \"city\" : \"Москва\", \"second_name\" : \"Фамилия\", \"id\" : \"id\", \"biography\" : \"Хобби, интересы и т.п.\", \"first_name\" : \"Имя\", \"age\" : 18 }, { \"birthdate\" : \"2017-02-01T00:00:00.000+00:00\", \"city\" : \"Москва\", \"second_name\" : \"Фамилия\", \"id\" : \"id\", \"biography\" : \"Хобби, интересы и т.п.\", \"first_name\" : \"Имя\", \"age\" : 18 } ]";
-                result = ApiUtil.getExampleResponse(exchange, mediaType, exampleString);
-                break;
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "[ { \"birthdate\" : \"2017-02-01T00:00:00.000+00:00\", \"city\" : \"Москва\", \"second_name\" : \"Фамилия\", \"id\" : \"id\", \"biography\" : \"Хобби, интересы и т.п.\", \"first_name\" : \"Имя\", \"age\" : 18 }, { \"birthdate\" : \"2017-02-01T00:00:00.000+00:00\", \"city\" : \"Москва\", \"second_name\" : \"Фамилия\", \"id\" : \"id\", \"biography\" : \"Хобби, интересы и т.п.\", \"first_name\" : \"Имя\", \"age\" : 18 } ]";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
             }
-        }
-        return result.then(Mono.empty());
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
 

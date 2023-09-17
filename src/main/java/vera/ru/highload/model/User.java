@@ -21,9 +21,9 @@ public class User {
 
     @Id
     private UUID id;
-    @Column("FIRST_NAME")
+    @Column("first_name")
     private String firstName;
-    @Column("SECOND_NAME")
+    @Column("second_name")
     private String secondName;
     private Integer age;
     private LocalDate birthdate;
