@@ -14,7 +14,7 @@ docker exec -it vera-postgres mkdir /sql
 docker cp ./docs/init/init.sql vera-postgres:/sql/
 docker exec -u postgres vera-postgres psql postgres postgres -f /sql/init.sql
 ```
-собираем образ, если вносили изменения (опционально, занимает 1-2 минуты, доступен в докерхаб)
+опционально собираем образ (или пропускаем и пулим с докерхаб на запуске)
 ```shell
 docker build --tag hanomi/vera-otus-highload-d1 .
 ```
